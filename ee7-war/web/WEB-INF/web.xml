@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app metadata-complete="true" version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <!--my descriptor file will be exlusivly processed by the container to deploy my app
+    because the metadata-complete is set to true-->
+    <filter>
+        <filter-name>MyFilter1</filter-name>
+        <filter-class>filters.MyFilter1</filter-class>
+        <async-supported>true</async-supported><!-- because there is a servlet supporting a asynchronous request in his scope-->
+
+    </filter>
+    <filter-mapping>
+        <filter-name>MyFilter1</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!-- listener creation, calling a callback when a event is happen -->
+    <listener>
+        <description>
+            ServletContextListener,
+            ServletContextAttributeListener,
+            HttpSessionListener,
+            HttpSessionAttributeListener,
+            RequestListener,
+            RequestAttributeListener
+        </description>
+        <listener-class>listener.NewServletListener</listener-class>
+    </listener>
+    <servlet>
+        <servlet-name>MyFirstServlet</servlet-name>
+        <servlet-class>tries.MyFirstServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Calculus</servlet-name>
+        <servlet-class>tries.Calculus</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MyFirstFilter</servlet-name>
+        <servlet-class>filters.MyFirstFilter</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MyAsyncServlet</servlet-name>
+        <servlet-class>tries.MyAsyncServlet</servlet-class>
+        <async-supported>true</async-supported>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MyFirstServlet</servlet-name>
+        <url-pattern>/MyFirstServletURL</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Calculus</servlet-name>
+        <url-pattern>/calculusURL</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MyFirstFilter</servlet-name>
+        <url-pattern>/MyFirstFilter</url-pattern>
+        
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MyAsyncServlet</servlet-name>
+        <url-pattern>/myAsyncServletURL</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>
